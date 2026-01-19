@@ -76,10 +76,11 @@ static int run_hello(void)
 	check_error(cuMemAlloc((CUdeviceptr*) &d_p1, 128), "cuMemAlloc d_p1", __LINE__);
 	check_error(cuMemcpyHtoD(d_p1, val, 10), "cuMemcpyHtoD", __LINE__);
 
-	int count = 10;
+	int count = 15;
 	void *args[] = {
 		&d_p1, &count
 	};
+    printf("Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
 
 	check_error(cuLaunchKernel(hello_kernel, 
 				1, 1, 1,

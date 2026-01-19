@@ -14,7 +14,7 @@ sudo apt-get install ecryptfs-utils cpufrequtils
 
 ## Compile kernel
 
-Clone `git@github.com:hfingler/linux-6.0.git`.
+Clone `[git@github.com:hfingler/linux-6.0.git](https://github.com/utcs-scea/LAKE-linux-6.0)`.
 Go in the directory and run `full_compilation.sh`, it should do everything.
 
 If you are running with a monitor, reboot and choose the new kernel in grub.

@@ -142,11 +142,11 @@ echo " > **************************************************"
 popd
 
 #Unload
-echo " > Unloading everything..."
-sleep 2
-sudo pkill -2 lake_uspace
-sleep 2
-sudo rmmod lake_kapi
-sleep 2
-sudo rmmod lake_shm
-echo " > Finished!"
+# echo " > Unloading everything..."
+# sleep 2
+# sudo pkill -2 lake_uspace
+# sleep 2
+# sudo rmmod lake_kapi
+# sleep 2
+# sudo rmmod lake_shm
+# echo " > Finished!"

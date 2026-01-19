@@ -12,6 +12,7 @@ PyObject *kleio_pDict = NULL;
 int inited = 0;
 
 int kleio_load_model(const char *filepath) {
+    printf("Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
     wchar_t** _argv = PyMem_Malloc(sizeof(wchar_t*)*1);
     wchar_t* arg = Py_DecodeLocale("test", NULL);
     _argv[0] = arg;
@@ -50,6 +51,7 @@ int kleio_load_model(const char *filepath) {
 }
 
 PyObject *makearray(int *array, size_t size) {
+    printf("Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
     // npy_intp dim = size;
     // PyObject *new_array = PyArray_SimpleNewFromData(1, &dim, NPY_INT, (void *)array);
     // printf("created array with %d\n", size);
@@ -65,6 +67,7 @@ PyObject *makearray(int *array, size_t size) {
 }
 
 uint64_t kleio_inference(const void *syscalls, unsigned int num_syscall, unsigned int use_gpu) {
+    printf("Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
     PyObject *standardInferenceFunc = PyDict_GetItem(kleio_pDict, PyUnicode_FromString("kleio_inference"));
     if (standardInferenceFunc == NULL) {
         printf("load inference python func failed\n");
@@ -91,6 +94,7 @@ uint64_t kleio_inference(const void *syscalls, unsigned int num_syscall, unsigne
 }
 
 void kleio_force_gc(void) {
+    printf("Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
     PyObject *func = PyDict_GetItem(kleio_pDict, PyUnicode_FromString("kleio_force_gc"));
     PyObject *pyResult = PyObject_CallObject(func, 0);
     if (!pyResult) {

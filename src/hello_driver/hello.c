@@ -34,7 +34,7 @@ MODULE_PARM_DESC(devID, "GPU device ID in use, default 0");
 
 static char *cubin_path = "hello.cubin";
 module_param(cubin_path, charp, 0444);
-MODULE_PARM_DESC(cubin_path, "The path to firewall.cubin, default ./firewall.cubin");
+MODULE_PARM_DESC(cubin_path, "The path to the cubin file");
 
 static int run_hello(void)
 {
@@ -65,15 +65,16 @@ static int run_hello(void)
 	t_start = ktime_get_ns();
 	check_error(cuMemAlloc((CUdeviceptr*) &d_p1, 128), "cuMemAlloc d_p1", __LINE__);
 	check_error(cuMemcpyHtoD(d_p1, val, 10), "cuMemcpyHtoD", __LINE__);
-	count = 10;
+	count = 15;
 	void *args[] = {
 		&d_p1, &count
 	};
+    PRINT(V_INFO, "Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
 
 	for (j=0 ; j < 16 ; j++) {
 		check_error(cuLaunchKernel(hello_kernel, 
 					1, 1, 1,
-					10, 1, 1, 
+					count, 1, 1, 
 					0, NULL, args, NULL),
 				"cuLaunchKernel", __LINE__);
 	}
@@ -82,9 +83,9 @@ static int run_hello(void)
 	t_stop2 = ktime_get_ns();
 
 	PRINT(V_INFO, "Times (us): %llu, %llu\n", (t_stop - t_start)/1000, (t_stop2 - t_start)/1000);
-	check_error(cuMemcpyDtoH(val, d_p1, 10*sizeof(int)), "cuMemcpyDtoH", __LINE__);
-	PRINT(V_INFO, "Printing resulting array: \n");
-	for (i = 0; i < 10; i++)
+	check_error(cuMemcpyDtoH(val, d_p1, count*sizeof(int)), "cuMemcpyDtoH", __LINE__);
+	PRINT(V_INFO, "Printing resulting array:\n");
+	for (i = 0; i < count; i++)
 		PRINT(V_INFO, " %d", val[i]);
 
 	cuCtxSynchronize();

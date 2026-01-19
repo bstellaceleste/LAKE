@@ -1,0 +1,4 @@
+find 1 or 2 kernel algorith, in addition to CFS, that are suitable for ML jobs (and for which workload, so that we can use for the test)
+our small test will consist of switching between CFS and that/those other algos when the job changes -- in this case, we should constraint the system by reducing the number of cpu cores used (for example, only 2 or 4)
+
+

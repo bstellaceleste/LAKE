@@ -14,3 +14,4 @@ SM_SCRIPT = $(ROOT_DIR)../../scripts/get_gpu_sm.sh
 
 all: 
 	nvcc $(NVCCFLAGS) --cubin $(shell $(SM_SCRIPT)) $(INCLUDES) -o hello.cubin hello.cu $(LDFLAGS)
+	nvcc $(NVCCFLAGS) --cubin $(shell $(SM_SCRIPT)) $(INCLUDES) -o vectoradd.cubin vectoradd.cu $(LDFLAGS)

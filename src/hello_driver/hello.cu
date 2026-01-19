@@ -17,9 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
+
 __global__ void hello_kernel(int* inputs, int n) {
     int id = blockIdx.x * blockDim.x + threadIdx.x;
     if (id < n) {
         inputs[id] = id;
     }
+    //inputs[0] = 1234;
 }

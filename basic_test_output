@@ -1,0 +1,118 @@
+6.0.0-lake
+make: Entering directory '/home/stellab/LAKE/src/kapi/uspace'
+rm -f lake_uspace
+make: Leaving directory '/home/stellab/LAKE/src/kapi/uspace'
+make: Entering directory '/home/stellab/LAKE/src/kapi/uspace'
+echo compiling netlink.c main.c handler_helpers.c handlers.c lake_shm.c kargs.cpp kleio/py_wrapper.c
+compiling netlink.c main.c handler_helpers.c handlers.c lake_shm.c kargs.cpp kleio/py_wrapper.c
+nvcc -I/usr/include/libnl3 -I/home/stellab/LAKE/src/kapi/uspace/../include -I/usr/local/cuda/include -D__MODELPATH__=\"/home/stellab/LAKE/src/kapi/uspace/../../kleio/lstm_page_539\" -D__INCPATH__=\"/home/stellab/LAKE/src/kapi/uspace/kleio\" -D__INCPATH2__=\"/home/stellab/LAKE/src/kapi/uspace/../../../lakevenv/lib/python3.8/site-packages/\" -I/usr/include/python3.8 -DNDEBUG -O2 -lcrypt -ldl  -lm -I../../../lakevenv/lib/python3.8/site-packages/numpy/core/include -I../../../lakevenv/lib/python3.8/site-packages/numpy/core/include/numpy netlink.c main.c handler_helpers.c handlers.c lake_shm.c kargs.cpp kleio/py_wrapper.c -o lake_uspace -I/usr/include/libnl3 -I/home/stellab/LAKE/src/kapi/uspace/../include -I/usr/local/cuda/include -D__MODELPATH__=\"/home/stellab/LAKE/src/kapi/uspace/../../kleio/lstm_page_539\" -D__INCPATH__=\"/home/stellab/LAKE/src/kapi/uspace/kleio\" -D__INCPATH2__=\"/home/stellab/LAKE/src/kapi/uspace/../../../lakevenv/lib/python3.8/site-packages/\" -lnl-3 -L/usr/local/cuda/lib64 -lcuda -lnvidia-ml  -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lm -lm 
+handlers.c: In function ‘lake_handler_cuStreamDestroy’:
+handlers.c:163:20: warning: implicit declaration of function ‘cuStreamDestroy_v2’; did you mean ‘cuStreamDestroy’? [-Wimplicit-function-declaration]
+     cmd_ret->res = cuStreamDestroy_v2(cmd->hStream);
+                    ^~~~~~~~~~~~~~~~~~
+                    cuStreamDestroy
+make: Leaving directory '/home/stellab/LAKE/src/kapi/uspace'
+make: Entering directory '/home/stellab/LAKE/src/kapi/kshm'
+make -C /lib/modules/6.0.0-lake/build M=/home/stellab/LAKE/src/kapi/kshm clean
+make[1]: Entering directory '/home/stellab/LAKE-linux-6.0'
+make[1]: Leaving directory '/home/stellab/LAKE-linux-6.0'
+make: Leaving directory '/home/stellab/LAKE/src/kapi/kshm'
+make: Entering directory '/home/stellab/LAKE/src/kapi/kshm'
+make -C /lib/modules/6.0.0-lake/build M=/home/stellab/LAKE/src/kapi/kshm modules
+make[1]: Entering directory '/home/stellab/LAKE-linux-6.0'
+  CC [M]  /home/stellab/LAKE/src/kapi/kshm/kshm_main.o
+  CC [M]  /home/stellab/LAKE/src/kapi/kshm/backend.o
+/home/stellab/LAKE/src/kapi/kshm/backend.c: In function ‘kshm_ioctl’:
+/home/stellab/LAKE/src/kapi/kshm/backend.c:160:9: warning: ignoring return value of ‘copy_to_user’, declared with attribute warn_unused_result [-Wunused-result]
+  160 |         copy_to_user((void *)arg, (void *)&size_in_bytes, sizeof(long));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LD [M]  /home/stellab/LAKE/src/kapi/kshm/lake_shm.o
+  MODPOST /home/stellab/LAKE/src/kapi/kshm/Module.symvers
+  CC [M]  /home/stellab/LAKE/src/kapi/kshm/lake_shm.mod.o
+  LD [M]  /home/stellab/LAKE/src/kapi/kshm/lake_shm.ko
+  BTF [M] /home/stellab/LAKE/src/kapi/kshm/lake_shm.ko
+make[1]: Leaving directory '/home/stellab/LAKE-linux-6.0'
+make: Leaving directory '/home/stellab/LAKE/src/kapi/kshm'
+make: Entering directory '/home/stellab/LAKE/src/kapi/kernel'
+make -C /lib/modules/6.0.0-lake/build M=/home/stellab/LAKE/src/kapi/kernel clean
+make[1]: Entering directory '/home/stellab/LAKE-linux-6.0'
+  CLEAN   /home/stellab/LAKE/src/kapi/kernel/Module.symvers
+make[1]: Leaving directory '/home/stellab/LAKE-linux-6.0'
+make: Leaving directory '/home/stellab/LAKE/src/kapi/kernel'
+make: Entering directory '/home/stellab/LAKE/src/kapi/kernel'
+make -C /lib/modules/6.0.0-lake/build M=/home/stellab/LAKE/src/kapi/kernel modules
+make[1]: Entering directory '/home/stellab/LAKE-linux-6.0'
+  CC [M]  /home/stellab/LAKE/src/kapi/kernel/main.o
+  CC [M]  /home/stellab/LAKE/src/kapi/kernel/kapi.o
+  CC [M]  /home/stellab/LAKE/src/kapi/kernel/netlink.o
+  CC [M]  /home/stellab/LAKE/src/kapi/kernel/kargs.o
+  LD [M]  /home/stellab/LAKE/src/kapi/kernel/lake_kapi.o
+  MODPOST /home/stellab/LAKE/src/kapi/kernel/Module.symvers
+  CC [M]  /home/stellab/LAKE/src/kapi/kernel/lake_kapi.mod.o
+  LD [M]  /home/stellab/LAKE/src/kapi/kernel/lake_kapi.ko
+  BTF [M] /home/stellab/LAKE/src/kapi/kernel/lake_kapi.ko
+make[1]: Leaving directory '/home/stellab/LAKE-linux-6.0'
+make: Leaving directory '/home/stellab/LAKE/src/kapi/kernel'
+~/LAKE/src/hello_driver ~/LAKE
+nvcc -O3 --cubin -gencode arch=compute_70,code=sm_70 -I/usr/local/cuda/include -I. -o hello.cubin hello.cu -L/usr/local/cuda/lib64 -lcuda
+make -C /lib/modules/6.0.0-lake/build M=/home/stellab/LAKE/src/hello_driver modules
+make[1]: Entering directory '/home/stellab/LAKE-linux-6.0'
+  CC [M]  /home/stellab/LAKE/src/hello_driver/hello.o
+/home/stellab/LAKE/src/hello_driver/hello.c: In function ‘run_hello’:
+/home/stellab/LAKE/src/hello_driver/hello.c:69:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   69 |  void *args[] = {
+      |  ^~~~
+  LD [M]  /home/stellab/LAKE/src/hello_driver/hello_kern.o
+  MODPOST /home/stellab/LAKE/src/hello_driver/Module.symvers
+  CC [M]  /home/stellab/LAKE/src/hello_driver/hello_kern.mod.o
+  LD [M]  /home/stellab/LAKE/src/hello_driver/hello_kern.ko
+  BTF [M] /home/stellab/LAKE/src/hello_driver/hello_kern.ko
+make[1]: Leaving directory '/home/stellab/LAKE-linux-6.0'
+rm -f hello.cubin
+make -f Makefile_cubin
+make[1]: Entering directory '/home/stellab/LAKE/src/hello_driver'
+nvcc -O3 --cubin -gencode arch=compute_70,code=sm_70 -I/usr/local/cuda/include -I. -o hello.cubin hello.cu -L/usr/local/cuda/lib64 -lcuda
+make[1]: Leaving directory '/home/stellab/LAKE/src/hello_driver'
+~/LAKE
+ > Trying to unload previously set up API
+ > You might see errors. Ignore them
+~/LAKE/src/kapi ~/LAKE
+rmmod: ERROR: Module lake_kapi is not currently loaded
+rmmod: ERROR: Module lake_shm is not currently loaded
+ > All unloaded. Loading them now.
+ > Loading shared memory module
+~/LAKE/src/kapi/kshm ~/LAKE/src/kapi ~/LAKE
+~/LAKE/src/kapi ~/LAKE
+ > Done.
+ > Loading kernel API remoting module
+~/LAKE/src/kapi/kernel ~/LAKE/src/kapi ~/LAKE
+~/LAKE/src/kapi ~/LAKE
+ > Done.
+ > **************    PLEASE READ    *****************
+ > We are about to run the user space daemon.
+ > If you see repeating netlink errors, press ctrl+c and start again. This means the
+ > user space application cannot communicate with the shared memory module.
+ > If you still can't run when trying this script again, run lsmod and check if the lake_* modules are loaded,
+ > if they are and are in use by one more modules, ** you need to restart your machine. **
+ > Make sure you added cma=128M@0-4G to your kernel parameters.
+ > **************************************************
+~/LAKE/src/kapi/uspace ~/LAKE/src/kapi ~/LAKE
+~/LAKE/src/kapi ~/LAKE
+ > Done. Waiting for things to settle..
+ > Checking if the user space daemon is running...
+ > Looks like it is.
+~/LAKE
+~/LAKE/src/hello_driver ~/LAKE
+ > **************************************************
+ > **************************************************
+ > Running hello world kernel module that uses CUDA.
+ > Success! run dmesg if you want to see the output
+ > **************************************************
+ > **************************************************
+~/LAKE
+ > Unloading everything...
+Starting uspace lake kapi with pid 14471
+Netlink connected, message sent to kernel
+Request shared memory size: 32 MB   33554432
+mmap shared memory region to 0x7fb762edd000, size=0x2000000
+ > Finished!

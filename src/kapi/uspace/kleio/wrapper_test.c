@@ -11,6 +11,7 @@
 char outs[2][200][1024];
 
 int main() {
+    printf("Bitchebe: Function %s, Line %d\n", __func__, __LINE__);
     struct timeval micro_start, micro_stop;
     long total_time = 0;
     int num_syscall = 0;
