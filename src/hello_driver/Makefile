@@ -1,10 +1,10 @@
 ccflags-y += -I$(src)/../kapi/include -I$(KAVA_ROOT)/include -O0 -g
 
-# obj-m += hello_kern.o  
-# hello_kern-objs := hello.o 
+obj-m += hello_kern.o  
+hello_kern-objs := hello.o 
 
-obj-m += test_stella.o # 
-test_stella-objs := vector_add.o
+# obj-m += test_stella.o # 
+# test_stella-objs := vector_add.o
 
 KBUILD_EXTRA_SYMBOLS += $(src)/../kapi/kshm/Module.symvers
 KBUILD_EXTRA_SYMBOLS += $(src)/../kapi/kernel/Module.symvers

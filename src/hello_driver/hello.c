@@ -44,7 +44,7 @@ static int run_hello(void)
     CUcontext ctx;	
     CUmodule mod;
     CUfunction hello_kernel;
-	int* val;	
+	int* val;
 	CUdeviceptr d_p1;
 	u64 t_start, t_stop, t_stop2;
 
@@ -58,7 +58,8 @@ static int run_hello(void)
     check_error(cuModuleGetFunction(&hello_kernel, mod, "_Z12hello_kernelPii"),
             "cuModuleGetFunction", __LINE__);
 
-	val = kava_alloc(10*sizeof(int));
+	val = kmalloc(10*sizeof(int), GFP_KERNEL);
+    PRINT(V_INFO, "Bitchebe: Function %s, Line %d - after kmalloc\n", __func__, __LINE__);
 	for (i = 0; i < 10; i++)
 		val[i] = 0;
 
@@ -90,7 +91,7 @@ static int run_hello(void)
 
 	cuCtxSynchronize();
 	cuMemFree(d_p1);
-	kava_free(val);
+	kfree(val);
 
  	// check_error(cuCtxDestroy(ctx), "cuCtxDestroy", __LINE__);
 	return 0;
